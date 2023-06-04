@@ -1,3 +1,5 @@
+'use client'
+
 import './signin.css'
 import { FcGoogle } from 'react-icons/fc'
 import { auth, googleProvider, db } from '../../config/firebase'

@@ -1,10 +1,9 @@
-'use client'
-
 import './signin.css'
 import { FcGoogle } from 'react-icons/fc'
-import { auth, googleProvider } from '../../config/firebase'
+import { auth, googleProvider, db } from '../../config/firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { signInWithPopup, signOut } from 'firebase/auth'
+import { doc, getDoc, setDoc } from 'firebase/firestore'
 
 const SignIn = () => {
   const [user] = useAuthState(auth)
@@ -15,6 +14,29 @@ const SignIn = () => {
         // You can access the user details from the result object
         const user = result.user
         console.log(user)
+
+        // Check if the user exists in the "users" table
+        const userRef = doc(db, 'users', user.uid)
+        getDoc(userRef)
+          .then((docSnapshot) => {
+            if (!docSnapshot.exists()) {
+              // User does not exist, add them to the "users" table
+              setDoc(userRef, {
+                displayName: user.displayName,
+                email: user.email,
+                // Add any other user details you want to store
+              })
+                .then(() => {
+                  console.log('User added to "users" table')
+                })
+                .catch((error) => {
+                  console.error('Error adding user to "users" table:', error)
+                })
+            }
+          })
+          .catch((error) => {
+            console.error('Error checking user existence:', error)
+          })
       })
       .catch((error) => {
         console.error('Google sign-in error:', error)

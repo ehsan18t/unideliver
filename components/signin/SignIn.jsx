@@ -5,7 +5,7 @@ import { FcGoogle } from 'react-icons/fc'
 import { auth, googleProvider, db } from '../../config/firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { signInWithPopup, signOut } from 'firebase/auth'
-import { doc, getDoc, setDoc } from 'firebase/firestore'
+import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
 
 const SignIn = () => {
   const [user] = useAuthState(auth)
@@ -21,11 +21,23 @@ const SignIn = () => {
         const userRef = doc(db, 'users', user.uid)
         getDoc(userRef)
           .then((docSnapshot) => {
-            if (!docSnapshot.exists()) {
+            if (docSnapshot.exists()) {
+              // User exists, update their login info in the "users" table
+              updateDoc(userRef, {
+                lastLogin: new Date(),
+              })
+                .then(() => {
+                  console.log('User login info updated')
+                })
+                .catch((error) => {
+                  console.error('Error updating user login info:', error)
+                })
+            } else {
               // User does not exist, add them to the "users" table
               setDoc(userRef, {
                 displayName: user.displayName,
                 email: user.email,
+                lastLogin: new Date(),
                 // Add any other user details you want to store
               })
                 .then(() => {

@@ -1,5 +1,5 @@
 .container {
-  @apply max-w-full bg-white h-20 shadow-md flex justify-between items-center px-4;
+  @apply min-w-full bg-white h-20 shadow-md flex justify-between items-center px-4;
 }
 
 .logo {

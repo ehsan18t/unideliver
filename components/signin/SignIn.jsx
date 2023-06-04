@@ -24,6 +24,7 @@ const SignIn = () => {
             if (docSnapshot.exists()) {
               // User exists, update their login info in the "users" table
               updateDoc(userRef, {
+                displayName: user.displayName,
                 lastLogin: new Date(),
               })
                 .then(() => {
@@ -35,6 +36,7 @@ const SignIn = () => {
             } else {
               // User does not exist, add them to the "users" table
               setDoc(userRef, {
+                uid: user.uid,
                 displayName: user.displayName,
                 email: user.email,
                 lastLogin: new Date(),

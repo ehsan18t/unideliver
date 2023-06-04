@@ -6,6 +6,8 @@ import { auth, googleProvider, db } from '../../config/firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { signInWithPopup, signOut } from 'firebase/auth'
 import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const SignIn = () => {
   const [user] = useAuthState(auth)
@@ -15,7 +17,10 @@ const SignIn = () => {
       .then((result) => {
         // You can access the user details from the result object
         const user = result.user
-        console.log(user)
+        toast.success('Login successful!', {
+          position: 'bottom-left',
+          autoClose: 2000,
+        })
 
         // Check if the user exists in the "users" table
         const userRef = doc(db, 'users', user.uid)
@@ -55,17 +60,26 @@ const SignIn = () => {
           })
       })
       .catch((error) => {
-        console.error('Google sign-in error:', error)
+        toast.error('Login failed!', {
+          position: 'bottom-left',
+          autoClose: 2000,
+        })
       })
   }
 
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
-        console.log('User signed out successfully')
+        toast.info('Logout Success!', {
+          position: 'bottom-left',
+          autoClose: 2000,
+        })
       })
       .catch((error) => {
-        console.error('Sign out error:', error)
+        toast.error('Logout failed!', {
+          position: 'bottom-left',
+          autoClose: 2000,
+        })
       })
   }
 
@@ -85,6 +99,7 @@ const SignIn = () => {
           </button>
         </>
       )}
+      <ToastContainer />
     </div>
   )
 }

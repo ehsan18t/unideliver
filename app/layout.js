@@ -1,5 +1,4 @@
 import Nav from '@/components/nav/Nav'
-import SignIn from '@/components/signin/SignIn'
 import './globals.css'
 
 export const metadata = {
@@ -12,7 +11,6 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <Nav />
-        <SignIn />
         {children}
       </body>
     </html>

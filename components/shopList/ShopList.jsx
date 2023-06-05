@@ -19,6 +19,8 @@ import {
 import { db, storage } from '@/config/firebase'
 import Modal from '@/components/modal/Modal'
 import ShopItem from './ShopItem'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const ShopList = () => {
   const [shops, setShops] = useState([])
@@ -46,7 +48,11 @@ const ShopList = () => {
   const handleAddShop = async () => {
     try {
       if (shopName === '' || location === '' || picture === null) {
-        alert('Please fill in all the required fields.')
+        toast.error('Please fill in all the required fields.', {
+          position: 'top-center',
+          autoClose: 2000,
+          theme: 'colored',
+        })
         return
       }
 
@@ -162,6 +168,7 @@ const ShopList = () => {
           </button>
         </div>
       </Modal>
+      <ToastContainer />
     </div>
   )
 }

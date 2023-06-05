@@ -1,4 +1,5 @@
 import { RiDeleteBin5Line } from 'react-icons/ri'
+import Link from 'next/link'
 import './shop-item.css'
 
 const ShopItem = ({ shop, onDelete }) => {
@@ -10,7 +11,9 @@ const ShopItem = ({ shop, onDelete }) => {
     <li key={shop.id}>
       <div className="shop">
         <div className="shop-img">
-          <img src={shop.pictureURL} alt={shop.shopName} />
+          <Link href={`/admin/shop/${shop.id}`}>
+            <img src={shop.pictureURL} alt={shop.shopName} />
+          </Link>
         </div>
         <div className="shop-details">
           <h>{shop.shopName}</h>

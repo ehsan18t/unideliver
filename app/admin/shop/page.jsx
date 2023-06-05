@@ -9,7 +9,6 @@ import {
   doc,
   getDoc,
 } from 'firebase/firestore'
-
 import {
   getDownloadURL,
   ref,
@@ -108,25 +107,32 @@ const Shop = () => {
 
   return (
     <div className="shop-page">
-      <h2>Shop List</h2>
+      <h2 className="text-2xl font-bold mb-4">Shop List</h2>
 
-      <button className="add-shop-button" onClick={() => setModalOpen(true)}>
+      <button
+        className="add-shop-button bg-blue-500 text-white rounded px-4 py-2 mb-4"
+        onClick={() => setModalOpen(true)}
+      >
         Add Shop
       </button>
 
       <ul>
         {shops.map((shop) => (
-          <li key={shop.id}>
-            <div className="shop-info">
-              <div className="shop-image">
-                <img src={shop.pictureURL} alt={shop.shopName} />
+          <li key={shop.id} className="mb-4">
+            <div className="shop-info flex items-center">
+              <div className="shop-image mr-4">
+                <img
+                  src={shop.pictureURL}
+                  alt={shop.shopName}
+                  className="w-20 h-20 object-cover rounded-full"
+                />
               </div>
               <div className="shop-details">
-                <h3>{shop.shopName}</h3>
-                <p>{shop.location}</p>
+                <h3 className="text-lg font-bold">{shop.shopName}</h3>
+                <p className="text-gray-500">{shop.location}</p>
               </div>
               <button
-                className="delete-button"
+                className="delete-button text-red-500 ml-auto"
                 onClick={() => handleDeleteShop(shop.id)}
               >
                 <RiDeleteBin5Line />
@@ -137,33 +143,45 @@ const Shop = () => {
       </ul>
 
       <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
-        <h3>Add Shop</h3>
+        <h3 className="text-xl font-bold mb-4">Add Shop</h3>
         <div className="modal-content">
-          <label htmlFor="shopName">Shop Name:</label>
+          <label htmlFor="shopName" className="block mb-2">
+            Shop Name:
+          </label>
           <input
             type="text"
             id="shopName"
             value={shopName}
             onChange={(e) => setShopName(e.target.value)}
+            className="w-full px-2 py-1 border rounded mb-2"
           />
 
-          <label htmlFor="location">Location:</label>
+          <label htmlFor="location" className="block mb-2">
+            Location:
+          </label>
           <input
             type="text"
             id="location"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
+            className="w-full px-2 py-1 border rounded mb-2"
           />
 
-          <label htmlFor="picture">Picture:</label>
+          <label htmlFor="picture" className="block mb-2">
+            Picture:
+          </label>
           <input
             type="file"
             id="picture"
             accept="image/*"
             onChange={handlePictureUpload}
+            className="mb-2"
           />
 
-          <button className="add-shop-button" onClick={handleAddShop}>
+          <button
+            className="add-shop-button bg-blue-500 text-white rounded px-4 py-2"
+            onClick={handleAddShop}
+          >
             Add Shop
           </button>
         </div>

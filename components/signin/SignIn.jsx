@@ -44,6 +44,8 @@ const SignIn = () => {
                 uid: user.uid,
                 displayName: user.displayName,
                 email: user.email,
+                isAdmin: false,
+                isBanned: false,
                 lastLogin: new Date(),
                 // Add any other user details you want to store
               })

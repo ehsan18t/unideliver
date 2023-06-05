@@ -110,7 +110,8 @@ const ShopList = () => {
     <div className="shop-list">
       <button onClick={() => setModalOpen(true)}>Add Shop</button>
 
-      <h2 className="text-2xl font-bold mb-4">Shop List</h2>
+      <h2>Shop List</h2>
+
       <ul>
         {shops.map((shop) => (
           <ShopItem key={shop.id} shop={shop} onDelete={handleDeleteShop} />

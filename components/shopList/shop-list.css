@@ -1,5 +1,5 @@
 .shop-list {
-  @apply border-2;
+  @apply mx-4;
 }
 
 .shop-list > button {
@@ -11,5 +11,10 @@
   @apply bg-blue-600;
 }
 
+.shop-list > ul {
+  @apply border-b-2;
+}
+
 .shop-list h2 {
+  @apply text-2xl text-gray-100 border-b-4 border-slate-400 font-bold bg-slate-500 p-4;
 }

@@ -14,13 +14,17 @@
   @apply flex flex-col md:flex-row items-center justify-between;
 }
 
-.user .secondary,
-.user .action {
-  @apply flex flex-col md:flex-row items-center justify-between;
+.user .secondary {
+  @apply flex flex-col md:flex-row text-center text-xs text-gray-500;
 }
 
-.user .secondary {
-  @apply text-xs text-gray-500;
+.user .action {
+  @apply flex;
+}
+
+.user .secondary,
+.user .action {
+  @apply items-center justify-between;
 }
 
 .btn {

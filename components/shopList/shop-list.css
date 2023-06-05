@@ -1,0 +1,15 @@
+.shop-list {
+  @apply border-2;
+}
+
+.shop-list > button {
+  @apply mx-auto block my-4 transition ease-in-out duration-300;
+  @apply w-1/4 bg-blue-500 text-white rounded px-4 py-2;
+}
+
+.shop-list > button:hover {
+  @apply bg-blue-600;
+}
+
+.shop-list h2 {
+}

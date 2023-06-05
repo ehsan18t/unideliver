@@ -1,5 +1,6 @@
 'use client'
 
+import './shop-list.css'
 import React, { useState, useEffect } from 'react'
 import {
   collection,
@@ -106,13 +107,8 @@ const ShopList = () => {
   }
 
   return (
-    <div className="shop-page border-2">
-      <button
-        className="add-shop-button bg-blue-500 text-white rounded px-4 py-2 mb-4"
-        onClick={() => setModalOpen(true)}
-      >
-        Add Shop
-      </button>
+    <div className="shop-list">
+      <button onClick={() => setModalOpen(true)}>Add Shop</button>
 
       <h2 className="text-2xl font-bold mb-4">Shop List</h2>
       <ul>

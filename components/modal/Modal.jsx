@@ -1,4 +1,5 @@
 import React from 'react'
+import { IoMdClose } from 'react-icons/io'
 import './modal.css'
 
 const Modal = ({ isOpen, onClose, children }) => {
@@ -8,7 +9,7 @@ const Modal = ({ isOpen, onClose, children }) => {
     <div className="modal">
       <div className="modal-content">
         <button className="close-button" onClick={onClose}>
-          &times;
+          <IoMdClose />
         </button>
         {children}
       </div>

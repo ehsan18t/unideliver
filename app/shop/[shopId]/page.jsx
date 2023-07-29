@@ -5,6 +5,7 @@ import { collection, onSnapshot, doc } from 'firebase/firestore'
 import { db } from '@/config/firebase'
 import { useParams } from 'next/navigation'
 import ShopBanner from '@/components/shopList/ShopBanner'
+import Loading from '@/components/common/Loading'
 
 export default function ShopPage() {
   const params = useParams()
@@ -19,7 +20,7 @@ export default function ShopPage() {
   }, [shopId])
 
   if (!shop) {
-    return <div>Loading...</div>
+    return <Loading />
   }
 
   return (

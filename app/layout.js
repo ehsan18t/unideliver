@@ -4,17 +4,9 @@ import { RiAdminLine } from 'react-icons/ri'
 import Navbar from '@/components/nav/Navbar'
 import { NavItem } from '@/components/nav/NavItem'
 import '@/styles/globals.css'
-import { useEffect, useState } from 'react'
 import { useAuth } from '@/hooks/useAuth'
-import { onSnapshot, doc } from 'firebase/firestore'
-import { db } from '@/config/firebase'
 import SignIn from '@/components/signin/SignIn'
 import { ToastContainer } from 'react-toastify'
-
-export const metadata = {
-  title: 'Home Page',
-  description: 'This is the home page',
-}
 
 export default function RootLayout({ children }) {
   const { user } = useAuth()

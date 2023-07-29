@@ -2,7 +2,6 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { HiMenu } from 'react-icons/hi'
 import { useAuth } from '@/hooks/useAuth'
-import Image from 'next/image'
 
 const Navbar = ({ children }) => {
   const [isSidebarOpen, setSidebarOpen] = useState(false)
@@ -42,9 +41,7 @@ const Navbar = ({ children }) => {
             aria-label="Toggle sidebar"
           >
             {!loading && user && user.photoURL ? (
-              <Image
-                width={40}
-                height={40}
+              <img
                 src={user.photoURL}
                 alt="User Profile"
                 className="w-10 h-10 rounded-full cursor-pointer"

@@ -4,7 +4,7 @@ import './userList.css'
 import { useEffect, useState } from 'react'
 import { db } from '@/config/firebase'
 import { collection, onSnapshot, updateDoc, doc } from 'firebase/firestore'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 const UserList = () => {
@@ -112,8 +112,6 @@ const UserList = () => {
           </li>
         ))}
       </ul>
-
-      <ToastContainer />
     </div>
   )
 }

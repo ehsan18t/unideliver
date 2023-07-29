@@ -9,6 +9,7 @@ import { useAuth } from '@/hooks/useAuth'
 import { onSnapshot, doc } from 'firebase/firestore'
 import { db } from '@/config/firebase'
 import SignIn from '@/components/signin/SignIn'
+import { ToastContainer } from 'react-toastify'
 
 export const metadata = {
   title: 'Home Page',
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
           )}
         </Navbar>
         {children}
+        <ToastContainer />
       </body>
     </html>
   )

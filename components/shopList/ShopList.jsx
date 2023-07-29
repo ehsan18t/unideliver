@@ -14,7 +14,6 @@ import { db, storage } from '@/config/firebase'
 import Modal from '@/components/modal/Modal'
 import ShopItem from './ShopItem'
 import AddShopForm from './AddShopForm'
-import { ToastContainer } from 'react-toastify'
 import { useAuth } from '@/hooks/useAuth'
 
 const ShopList = () => {
@@ -73,7 +72,6 @@ const ShopList = () => {
       <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
         <AddShopForm onClose={() => setModalOpen(false)} />
       </Modal>
-      <ToastContainer />
     </div>
   )
 }

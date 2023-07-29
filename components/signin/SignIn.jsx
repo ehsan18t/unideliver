@@ -5,7 +5,7 @@ import { auth, googleProvider, db } from '@/config/firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { signInWithPopup, signOut } from 'firebase/auth'
 import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { LiaSignOutAltSolid } from 'react-icons/lia'
 
@@ -102,7 +102,6 @@ const SignIn = () => {
           </button>
         </div>
       )}
-      <ToastContainer />
     </div>
   )
 }

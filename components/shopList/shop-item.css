@@ -17,8 +17,3 @@
 .shop-details p {
   @apply text-gray-500;
 }
-
-.shop-item-del-button {
-  @apply transition-all duration-300 ease-in-out hover:ring-1 hover:ring-red-300 hover:bg-red-100 hover:shadow-md;
-  @apply text-red-500 hover:text-red-700 ml-auto text-4xl mr-2 p-4 rounded-full;
-}

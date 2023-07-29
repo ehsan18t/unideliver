@@ -11,7 +11,7 @@ const ShopItem = ({ shop, onDelete }) => {
     <li key={shop.id}>
       <div className="shop">
         <div className="shop-img">
-          <Link href={`/admin/shop/${shop.id}`}>
+          <Link href={`/shop/${shop.id}`}>
             <img src={shop.pictureURL} alt={shop.shopName} />
           </Link>
         </div>

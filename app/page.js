@@ -1,5 +1,9 @@
-import SignIn from '@/components/signin/SignIn'
+import ShopList from '@/components/shopList/ShopList'
 
 export default function Home() {
-  return <>Content Here</>
+  return (
+    <>
+      <ShopList />
+    </>
+  )
 }

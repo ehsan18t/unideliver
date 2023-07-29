@@ -60,6 +60,7 @@ export default function ShopPage() {
               <h2>{item.name}</h2>
               <p>{item.description}</p>
               <p>{item.price}</p>
+              <p>{item.deliveryCharge}</p>
 
               <button>Add to cart</button>
             </div>

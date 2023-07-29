@@ -9,6 +9,7 @@ const AddItemForm = ({ onClose, shopId }) => {
   const [itemName, setItemName] = useState('')
   const [description, setLocation] = useState('')
   const [price, setPrice] = useState(0.0)
+  const [deliveryCharge, setDeliveryCharge] = useState(0.0)
   const [picture, setPicture] = useState(null)
 
   const handleAddItem = async () => {
@@ -39,6 +40,7 @@ const AddItemForm = ({ onClose, shopId }) => {
           itemName,
           description,
           price,
+          deliveryCharge,
           pictureURL,
           shopId,
         })
@@ -94,6 +96,17 @@ const AddItemForm = ({ onClose, shopId }) => {
           id="price"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
+          className="w-full px-2 py-1 border rounded mb-2"
+        />
+
+        <label htmlFor="deliveryCharge" className="block mb-2">
+          Delivery Charge:
+        </label>
+        <input
+          type="number"
+          id="deliveryCharge"
+          value={price}
+          onChange={(e) => setDeliveryCharge(e.target.value)}
           className="w-full px-2 py-1 border rounded mb-2"
         />
 

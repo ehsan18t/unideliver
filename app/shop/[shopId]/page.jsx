@@ -1,22 +1,14 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import {
-  collection,
-  onSnapshot,
-  doc,
-  query,
-  where,
-  deleteDoc,
-  getDoc,
-} from 'firebase/firestore'
-import { ref, deleteObject } from 'firebase/storage'
-import { db, storage } from '@/config/firebase'
+import { collection, onSnapshot, doc, query, where } from 'firebase/firestore'
+import { db } from '@/config/firebase'
 import { useParams } from 'next/navigation'
 import ShopBanner from '@/components/shopList/ShopBanner'
 import Loading from '@/components/common/Loading'
 import AddItemForm from '@/components/item/AddItemForm'
 import { useAuth } from '@/hooks/useAuth'
+import useItemDeletion from '@/hooks/useItemDeletion'
 import Modal from '@/components/modal/Modal'
 import Item from '@/components/item/Item'
 
@@ -27,6 +19,7 @@ export default function ShopPage() {
   const [items, setItems] = useState([])
   const [modalOpen, setModalOpen] = useState(false)
   const { user } = useAuth()
+  const { loading, error, deleteItem } = useItemDeletion()
 
   useEffect(() => {
     const unsubscribe = onSnapshot(doc(db, 'shops', shopId), (doc) => {
@@ -57,24 +50,8 @@ export default function ShopPage() {
     return <Loading />
   }
 
-  const handleDeleteItem = async (itemId) => {
-    try {
-      const itemRef = doc(collection(db, 'items'), itemId)
-
-      // Get the item document to retrieve the picture URL
-      const itemSnapshot = await getDoc(itemRef)
-      const itemData = itemSnapshot.data()
-      const pictureURL = itemData.pictureURL
-
-      // Delete the item document from Firestore
-      await deleteDoc(itemRef)
-
-      // Delete the image from Firebase storage
-      const pictureRef = ref(storage, pictureURL)
-      await deleteObject(pictureRef)
-    } catch (error) {
-      console.error('Error deleting item:', error)
-    }
+  const handleDeleteItem = async (item) => {
+    deleteItem('items', item.id, item.pictureURL)
   }
 
   return (
@@ -91,7 +68,11 @@ export default function ShopPage() {
       <div className="p-4">
         {items &&
           items.map((item) => (
-            <Item key={item.id} item={item} onDelete={handleDeleteItem} />
+            <Item
+              key={item.id}
+              item={item}
+              onDelete={() => handleDeleteItem(item)}
+            />
           ))}
       </div>
       <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>

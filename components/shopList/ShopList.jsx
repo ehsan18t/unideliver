@@ -2,24 +2,19 @@
 
 import './shop-list.css'
 import React, { useState, useEffect } from 'react'
-import {
-  collection,
-  onSnapshot,
-  deleteDoc,
-  doc,
-  getDoc,
-} from 'firebase/firestore'
-import { deleteObject } from 'firebase/storage'
-import { db, storage } from '@/config/firebase'
+import { collection, onSnapshot } from 'firebase/firestore'
+import { db } from '@/config/firebase'
 import Modal from '@/components/modal/Modal'
 import ShopItem from './ShopItem'
 import AddShopForm from './AddShopForm'
 import { useAuth } from '@/hooks/useAuth'
+import useItemDeletion from '@/hooks/useItemDeletion'
 
 const ShopList = () => {
   const { user } = useAuth()
   const [shops, setShops] = useState([])
   const [modalOpen, setModalOpen] = useState(false)
+  const { loading, error, deleteItem } = useItemDeletion()
 
   useEffect(() => {
     const shopsCollection = collection(db, 'shops')
@@ -37,24 +32,8 @@ const ShopList = () => {
     }
   }, [])
 
-  const handleDeleteShop = async (shopId) => {
-    try {
-      const shopRef = doc(collection(db, 'shops'), shopId)
-
-      // Get the shop document to retrieve the picture URL
-      const shopSnapshot = await getDoc(shopRef)
-      const shopData = shopSnapshot.data()
-      const pictureURL = shopData.pictureURL
-
-      // Delete the shop document from Firestore
-      await deleteDoc(shopRef)
-
-      // Delete the image from Firebase storage
-      const pictureRef = ref(storage, pictureURL)
-      await deleteObject(pictureRef)
-    } catch (error) {
-      console.error('Error deleting shop:', error)
-    }
+  const handleDeleteShop = async (shop) => {
+    deleteItem('shops', shop.id, shop.pictureURL)
   }
 
   return (
@@ -65,7 +44,11 @@ const ShopList = () => {
 
       <ul className="my-grid">
         {shops.map((shop) => (
-          <ShopItem key={shop.id} shop={shop} onDelete={handleDeleteShop} />
+          <ShopItem
+            key={shop.id}
+            shop={shop}
+            onDelete={() => handleDeleteShop(shop)}
+          />
         ))}
       </ul>
 

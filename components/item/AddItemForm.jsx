@@ -14,7 +14,13 @@ const AddItemForm = ({ onClose, shopId }) => {
 
   const handleAddItem = async () => {
     try {
-      if (itemName === '' || description === '' || picture === null) {
+      if (
+        itemName === '' ||
+        price < 1 ||
+        deliveryCharge < 0 ||
+        description === '' ||
+        picture === null
+      ) {
         toast.error('Please fill in all the required fields.', {
           position: 'top-center',
           autoClose: 2000,

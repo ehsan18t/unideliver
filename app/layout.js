@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react'
 import { useAuth } from '@/hooks/useAuth'
 import { onSnapshot, doc } from 'firebase/firestore'
 import { db } from '@/config/firebase'
+import SignIn from '@/components/signin/SignIn'
 
 export const metadata = {
   title: 'Home Page',
@@ -39,10 +40,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <Navbar>
+          <SignIn />
           <NavItem to="/" name="Home" icon={AiOutlineHome} />
           <NavItem to="#" name="Shop" icon={AiOutlineShop} />
           {user && isAdmin && (
-            <NavItem to="/admin" name="Admin" icon={RiAdminLine} />
+            <NavItem to="/admin" name="Admin Panel" icon={RiAdminLine} />
           )}
         </Navbar>
         {children}

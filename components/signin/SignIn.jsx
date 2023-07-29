@@ -1,13 +1,13 @@
 'use client'
-
 import './signin.css'
 import { FcGoogle } from 'react-icons/fc'
-import { auth, googleProvider, db } from '../../config/firebase'
+import { auth, googleProvider, db } from '@/config/firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { signInWithPopup, signOut } from 'firebase/auth'
 import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import { LiaSignOutAltSolid } from 'react-icons/lia'
 
 const SignIn = () => {
   const [user] = useAuthState(auth)
@@ -18,7 +18,7 @@ const SignIn = () => {
         // You can access the user details from the result object
         const user = result.user
         toast.success('Login successful!', {
-          position: 'bottom-left',
+          position: 'bottom-right',
           autoClose: 2000,
         })
 
@@ -73,7 +73,7 @@ const SignIn = () => {
     signOut(auth)
       .then(() => {
         toast.info('Logout Success!', {
-          position: 'bottom-left',
+          position: 'bottom-right',
           autoClose: 2000,
         })
       })
@@ -86,20 +86,21 @@ const SignIn = () => {
   }
 
   return (
-    <div className="signin-container">
+    <div className="signin-container pb-6">
       {user ? (
-        <>
-          <h4>Hello, {user.displayName}</h4>
-          <button onClick={handleSignOut}>Sign Out</button>
-        </>
-      ) : (
-        <>
-          <h3>Please Sign In to Use UniDeliver</h3>
-          <button onClick={signInWithGoogle}>
-            <FcGoogle className="mr-2" />
-            Sign in with Google
+        <div className="w-full flex justify-between px-1 gap-1 items-center">
+          <h4>{user.displayName}</h4>
+          <button onClick={handleSignOut}>
+            <LiaSignOutAltSolid className="h-10 w-10 p-1 text-red-500 hover:bg-gray-800 hover:text-white rounded-full transition duration-200 ease-in-out" />
           </button>
-        </>
+        </div>
+      ) : (
+        <div className="flex justify-center items-center">
+          <button className="signin-button" onClick={signInWithGoogle}>
+            <FcGoogle className="mr-2 h-8 w-8" />
+            Sign in
+          </button>
+        </div>
       )}
       <ToastContainer />
     </div>

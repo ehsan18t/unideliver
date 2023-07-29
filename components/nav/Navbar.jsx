@@ -60,9 +60,6 @@ const Navbar = ({ children }) => {
           }`}
         >
           <div className="p-4">
-            <div className="flex items-center justify-between">
-              <span className="text-2xl font-bold">Menu</span>
-            </div>
             <div className="mt-4">{children}</div>
           </div>
         </div>

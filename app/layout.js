@@ -16,26 +16,7 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }) {
-  const { user, loading } = useAuth()
-  const [isAdmin, setIsAdmin] = useState(false)
-
-  useEffect(() => {
-    if (!loading && user) {
-      const userRef = doc(db, 'users', user.uid)
-      const unsubscribe = onSnapshot(userRef, (doc) => {
-        if (doc.exists()) {
-          const userData = doc.data()
-          setIsAdmin(userData.isAdmin)
-        }
-      })
-
-      return () => {
-        // Cleanup the listener when the component unmounts
-        unsubscribe()
-      }
-    }
-  }, [user, loading])
-
+  const { user } = useAuth()
   return (
     <html lang="en">
       <body>
@@ -43,7 +24,7 @@ export default function RootLayout({ children }) {
           <SignIn />
           <NavItem to="/" name="Home" icon={AiOutlineHome} />
           <NavItem to="#" name="Shop" icon={AiOutlineShop} />
-          {user && isAdmin && (
+          {user && user.isAdmin && (
             <NavItem to="/admin" name="Admin Panel" icon={RiAdminLine} />
           )}
         </Navbar>

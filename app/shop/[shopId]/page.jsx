@@ -1,8 +1,17 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { collection, onSnapshot, doc, query, where } from 'firebase/firestore'
-import { db } from '@/config/firebase'
+import {
+  collection,
+  onSnapshot,
+  doc,
+  query,
+  where,
+  deleteDoc,
+  getDoc,
+} from 'firebase/firestore'
+import { ref, deleteObject } from 'firebase/storage'
+import { db, storage } from '@/config/firebase'
 import { useParams } from 'next/navigation'
 import ShopBanner from '@/components/shopList/ShopBanner'
 import Loading from '@/components/common/Loading'
@@ -48,6 +57,26 @@ export default function ShopPage() {
     return <Loading />
   }
 
+  const handleDeleteItem = async (itemId) => {
+    try {
+      const itemRef = doc(collection(db, 'items'), itemId)
+
+      // Get the item document to retrieve the picture URL
+      const itemSnapshot = await getDoc(itemRef)
+      const itemData = itemSnapshot.data()
+      const pictureURL = itemData.pictureURL
+
+      // Delete the item document from Firestore
+      await deleteDoc(itemRef)
+
+      // Delete the image from Firebase storage
+      const pictureRef = ref(storage, pictureURL)
+      await deleteObject(pictureRef)
+    } catch (error) {
+      console.error('Error deleting item:', error)
+    }
+  }
+
   return (
     <div>
       <ShopBanner shop={shop} />
@@ -60,7 +89,10 @@ export default function ShopPage() {
         </button>
       )}
       <div className="p-4">
-        {items && items.map((item) => <Item key={item.id} item={item} />)}
+        {items &&
+          items.map((item) => (
+            <Item key={item.id} item={item} onDelete={handleDeleteItem} />
+          ))}
       </div>
       <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
         <AddItemForm onClose={() => setModalOpen(false)} shopId={shopId} />

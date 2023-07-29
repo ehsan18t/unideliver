@@ -3,7 +3,7 @@
 }
 
 .shop-list > button {
-  @apply mx-auto block my-4 transition ease-in-out duration-300;
+  @apply mx-auto block mb-4 transition ease-in-out duration-300;
   @apply w-1/4 bg-blue-500 text-white rounded px-4 py-2;
 }
 
@@ -17,4 +17,9 @@
 
 .shop-list h2 {
   @apply text-2xl text-gray-100 border-b-4 border-slate-400 font-bold bg-slate-500 p-4;
+}
+
+/* Grid */
+.my-grid {
+  @apply grid grid-cols-4 gap-4;
 }

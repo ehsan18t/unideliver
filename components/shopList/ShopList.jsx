@@ -15,8 +15,10 @@ import Modal from '@/components/modal/Modal'
 import ShopItem from './ShopItem'
 import AddShopForm from './AddShopForm'
 import { ToastContainer } from 'react-toastify'
+import { useAuth } from '@/hooks/useAuth'
 
 const ShopList = () => {
+  const { user } = useAuth()
   const [shops, setShops] = useState([])
   const [modalOpen, setModalOpen] = useState(false)
 
@@ -57,12 +59,12 @@ const ShopList = () => {
   }
 
   return (
-    <div className="shop-list">
-      <button onClick={() => setModalOpen(true)}>Add Shop</button>
+    <div className="shop-list mt-4">
+      {user && user.isAdmin && (
+        <button onClick={() => setModalOpen(true)}>Add Shop</button>
+      )}
 
-      <h2>Shop List</h2>
-
-      <ul>
+      <ul className="my-grid">
         {shops.map((shop) => (
           <ShopItem key={shop.id} shop={shop} onDelete={handleDeleteShop} />
         ))}

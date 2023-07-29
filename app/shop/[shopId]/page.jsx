@@ -9,6 +9,7 @@ import Loading from '@/components/common/Loading'
 import AddItemForm from '@/components/item/AddItemForm'
 import { useAuth } from '@/hooks/useAuth'
 import Modal from '@/components/modal/Modal'
+import Item from '@/components/item/Item'
 
 export default function ShopPage() {
   const params = useParams()
@@ -51,20 +52,15 @@ export default function ShopPage() {
     <div>
       <ShopBanner shop={shop} />
       {user && user.isAdmin && (
-        <button onClick={() => setModalOpen(true)}>Add Item</button>
+        <button
+          className="mx-auto my-4 block transition ease-in-out duration-300 w-1/4 bg-blue-500 text-white rounded px-4 py-2"
+          onClick={() => setModalOpen(true)}
+        >
+          Add Item
+        </button>
       )}
-      <div>
-        {items &&
-          items.map((item) => (
-            <div key={item.id}>
-              <h2>{item.name}</h2>
-              <p>{item.description}</p>
-              <p>{item.price}</p>
-              <p>{item.deliveryCharge}</p>
-
-              <button>Add to cart</button>
-            </div>
-          ))}
+      <div className="p-4">
+        {items && items.map((item) => <Item key={item.id} item={item} />)}
       </div>
       <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
         <AddItemForm onClose={() => setModalOpen(false)} shopId={shopId} />

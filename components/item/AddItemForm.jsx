@@ -111,7 +111,7 @@ const AddItemForm = ({ onClose, shopId }) => {
         <input
           type="number"
           id="deliveryCharge"
-          value={price}
+          value={deliveryCharge}
           onChange={(e) => setDeliveryCharge(e.target.value)}
           className="w-full px-2 py-1 border rounded mb-2"
         />

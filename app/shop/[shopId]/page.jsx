@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { collection, onSnapshot, doc, query, where } from 'firebase/firestore'
+import { onSnapshot, doc } from 'firebase/firestore'
 import { db } from '@/config/firebase'
 import { useParams } from 'next/navigation'
 import ShopBanner from '@/components/shopList/ShopBanner'
@@ -11,12 +11,13 @@ import { useAuth } from '@/hooks/useAuth'
 import useItemDeletion from '@/hooks/useItemDeletion'
 import Modal from '@/components/modal/Modal'
 import Item from '@/components/item/Item'
+import useFilteredItems from '@/hooks/useFilteredItems'
 
 export default function ShopPage() {
   const params = useParams()
   const shopId = params.shopId
   const [shop, setShop] = useState(null)
-  const [items, setItems] = useState([])
+  const items = useFilteredItems('items', 'shopId', shopId)
   const [modalOpen, setModalOpen] = useState(false)
   const { user } = useAuth()
   const { loading, error, deleteItem } = useItemDeletion()
@@ -26,24 +27,6 @@ export default function ShopPage() {
       setShop(doc.data())
     })
     return () => unsubscribe()
-  }, [shopId])
-
-  useEffect(() => {
-    const itemsQuery = query(
-      collection(db, 'items'),
-      where('shopId', '==', shopId),
-    )
-    const unsubscribeItems = onSnapshot(itemsQuery, (snapshot) => {
-      const itemList = snapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }))
-      setItems(itemList)
-    })
-
-    return () => {
-      unsubscribeItems()
-    }
   }, [shopId])
 
   if (!shop) {

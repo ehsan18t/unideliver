@@ -14,14 +14,14 @@ const Item = ({ item, onDelete }) => {
     onDelete(item.id)
   }
 
-  const addToCartHandler = async (itemId, userId) => {
+  const addToCartHandler = async (item, userId) => {
     // Create a reference to the "cart" collection
     const cartRef = collection(db, 'cart')
 
     // Check if the item is already in the cart for the current user
     const cartQuery = query(
       cartRef,
-      where('itemId', '==', itemId),
+      where('item', '==', item),
       where('uid', '==', userId),
     )
     const cartSnapshot = await getDocs(cartQuery)
@@ -38,7 +38,7 @@ const Item = ({ item, onDelete }) => {
 
     // Data to be added to the cart document
     const cartData = {
-      itemId: itemId,
+      item: item,
       uid: userId,
     }
 
@@ -89,7 +89,7 @@ const Item = ({ item, onDelete }) => {
 
                 <button
                   className="text-4xl text-teal-700 rounded-full p-2 transition duration-200 ease-in-out hover:text-white hover:bg-gray-600"
-                  onClick={() => addToCartHandler(item.id, user.uid)}
+                  onClick={() => addToCartHandler(item, user.uid)}
                 >
                   <TiShoppingCart />
                 </button>

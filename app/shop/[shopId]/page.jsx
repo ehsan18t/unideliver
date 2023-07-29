@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import { collection, onSnapshot, doc } from 'firebase/firestore'
 import { db } from '@/config/firebase'
 import { useParams } from 'next/navigation'
+import ShopBanner from '@/components/shopList/ShopBanner'
 
 export default function ShopPage() {
   const params = useParams()
@@ -23,9 +24,7 @@ export default function ShopPage() {
 
   return (
     <div>
-      <h2>{shop.shopName}</h2>
-      <p>{shop.location}</p>
-      <img src={shop.pictureURL} alt={shop.shopName} />
+      <ShopBanner shop={shop} />
     </div>
   )
 }

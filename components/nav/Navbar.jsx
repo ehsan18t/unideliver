@@ -1,7 +1,9 @@
 'use client'
 import React, { useState, useEffect, useRef } from 'react'
 import { HiMenu } from 'react-icons/hi'
+import { BsCart4 } from 'react-icons/bs'
 import { useAuth } from '@/hooks/useAuth'
+import Link from 'next/link'
 
 const Navbar = ({ children }) => {
   const [isSidebarOpen, setSidebarOpen] = useState(false)
@@ -31,9 +33,14 @@ const Navbar = ({ children }) => {
     <nav className="bg-white p-4 shadow-sm">
       <div className="flex items-center justify-between">
         <div className="flex items-center text-gray-600 font-semibold text-3xl font-sans">
-          UniDeliver
+          <Link href="/">UniDeliver</Link>
         </div>
-        <div className="flex items-center">
+        <div className="flex gap-3 items-center">
+          {user && (
+            <Link href="/cart">
+              <BsCart4 className="w-10 h-10" />
+            </Link>
+          )}
           <button
             ref={hamburgerButtonRef}
             onClick={() => setSidebarOpen(!isSidebarOpen)}

@@ -9,19 +9,28 @@ import 'react-toastify/dist/ReactToastify.css'
 
 const UserList = () => {
   const [users, setUsers] = useState([])
+  const [searchText, setSearchText] = useState('')
+  const [userList, setUserList] = useState([])
 
   useEffect(() => {
     const usersCollection = collection(db, 'users')
     const unsubscribe = onSnapshot(usersCollection, (snapshot) => {
-      const userList = snapshot.docs.map((doc) => doc.data())
-      setUsers(userList)
+      const allUsers = snapshot.docs.map((doc) => doc.data())
+      setUsers(allUsers)
+      setUserList(allUsers)
     })
 
     return () => {
-      // Cleanup the listener when the component unmounts
       unsubscribe()
     }
   }, [])
+
+  useEffect(() => {
+    const filteredUsers = users.filter((user) => {
+      return user.displayName.toLowerCase().includes(searchText.toLowerCase())
+    })
+    setUserList(filteredUsers)
+  }, [searchText, users])
 
   const handleToggleAdmin = async (user) => {
     try {
@@ -81,9 +90,18 @@ const UserList = () => {
 
   return (
     <div className="user-list">
+      <div className="flex w-full justify-center items-center py-4">
+        <input
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          type="text"
+          placeholder="Search User"
+          className="border border-gray-300 rounded-md p-2 w-4/5"
+        />
+      </div>
       <h2>User List</h2>
       <ul>
-        {users.map((user) => (
+        {userList.map((user) => (
           <li key={user.uid}>
             <div className="user">
               <div className="primary">

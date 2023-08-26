@@ -21,7 +21,7 @@ const Item = ({ item, onDelete }) => {
     // Check if the item is already in the cart for the current user
     const cartQuery = query(
       cartRef,
-      where('item', '==', item),
+      where('item.id', '==', item.id),
       where('uid', '==', userId),
     )
     const cartSnapshot = await getDocs(cartQuery)

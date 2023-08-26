@@ -11,7 +11,7 @@ const useAuth = () => {
       if (authUser) {
         try {
           const userRef = doc(collection(db, 'users'), authUser.uid)
-          const unsubscribeSnapshot = onSnapshot(userRef, (userSnapshot) => {
+          onSnapshot(userRef, (userSnapshot) => {
             if (userSnapshot.exists()) {
               // Merge additional fields from Firestore with the authUser object
               const userData = userSnapshot.data()

@@ -88,6 +88,34 @@ const UserList = () => {
     }
   }
 
+  const handleToggleType = async (user) => {
+    try {
+      const userRef = doc(collection(db, 'users'), user.uid)
+      await updateDoc(userRef, {
+        isDeliveryMan: !user.isDeliveryMan,
+      })
+
+      toast.success('User has been designated as Delivery Man successfully!', {
+        position: 'bottom-left',
+        autoClose: 2000,
+      })
+
+      // Update the user's 'isBanned' status locally
+      const updatedUsers = users.map((u) => {
+        if (u.uid === user.uid) {
+          return { ...u, isDeliveryMan: !user.isDeliveryMan }
+        }
+        return u
+      })
+      setUsers(updatedUsers)
+    } catch (error) {
+      toast.error(`Error updating user Delivery Man status: ${error}`, {
+        position: 'bottom-left',
+        autoClose: 2000,
+      })
+    }
+  }
+
   return (
     <div className="user-list">
       <div className="flex w-full justify-center items-center py-4">
@@ -113,12 +141,22 @@ const UserList = () => {
                 <p>{user.uid}</p>
               </div>
               <div className="action">
-                <button
-                  className="btn-blue"
-                  onClick={() => handleToggleAdmin(user)}
-                >
-                  {user.isAdmin ? 'Remove Admin' : 'Make Admin'}
-                </button>
+                <div className="space-x-2">
+                  <button
+                    className="btn-blue"
+                    onClick={() => handleToggleType(user)}
+                  >
+                    {user.isDeliveryMan
+                      ? 'Remove Delivery Man'
+                      : 'Make Delivery Man'}
+                  </button>
+                  <button
+                    className="btn-blue"
+                    onClick={() => handleToggleAdmin(user)}
+                  >
+                    {user.isAdmin ? 'Remove Admin' : 'Make Admin'}
+                  </button>
+                </div>
                 <button
                   className="btn-red"
                   onClick={() => handleToggleBan(user)}

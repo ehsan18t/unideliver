@@ -18,12 +18,12 @@ const ShopItem = ({ shop, onDelete }) => {
     >
       <Link href={`/shop/${shop.id}`}>
         <img
-          className="rounded-t-lg shadow-md"
+          className="h-64 md:h-72 w-full object-cover rounded-t-lg"
           src={shop.pictureURL}
           alt={shop.shopName}
         />
       </Link>
-      <div className="p-5">
+      <div className="p-5 flex flex-col gap-1 flex-grow">
         <Link href={`/shop/${shop.id}`}>
           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
             {shop.shopName}

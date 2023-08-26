@@ -1,10 +1,10 @@
 'use client'
 import React, { useState } from 'react'
-import { BsCart4 } from 'react-icons/bs'
 import CartItem from '@/components/cart/CartItem'
 import useItemDeletion from '@/hooks/useItemDeletion'
 import { useFetchLive } from '@/hooks'
 import Button from '@/components/common/Button'
+import { HiOutlineShoppingCart } from 'react-icons/hi'
 
 const CartPane = ({ children }) => {
   const [isSidebarOpen, setSidebarOpen] = useState(false)
@@ -18,9 +18,9 @@ const CartPane = ({ children }) => {
   return (
     <section id="cart">
       <div className="flex gap-3 items-center">
-        <BsCart4
+        <HiOutlineShoppingCart
           onClick={() => setSidebarOpen(!isSidebarOpen)}
-          className="w-10 h-10"
+          className="text-orange-700 w-10 h-10 hover:text-slate-600 cursor-pointer"
         />
       </div>
       <div

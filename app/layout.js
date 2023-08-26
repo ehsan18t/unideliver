@@ -7,6 +7,7 @@ import '@/styles/globals.css'
 import { useAuth } from '@/hooks/useAuth'
 import SignIn from '@/components/signin/SignIn'
 import { ToastContainer } from 'react-toastify'
+import CartPane from '@/components/cart/CartPane'
 
 export default function RootLayout({ children }) {
   const { user } = useAuth()

@@ -4,6 +4,7 @@ import { HiMenu } from 'react-icons/hi'
 import { BsCart4 } from 'react-icons/bs'
 import { useAuth } from '@/hooks/useAuth'
 import Link from 'next/link'
+import CartPane from '@/components/cart/CartPane'
 
 const Navbar = ({ children }) => {
   const [isSidebarOpen, setSidebarOpen] = useState(false)
@@ -36,11 +37,7 @@ const Navbar = ({ children }) => {
           <Link href="/">UniDeliver</Link>
         </div>
         <div className="flex gap-3 items-center">
-          {user && (
-            <Link href="/cart">
-              <BsCart4 className="w-10 h-10" />
-            </Link>
-          )}
+          {user && <CartPane />}
           <button
             ref={hamburgerButtonRef}
             onClick={() => setSidebarOpen(!isSidebarOpen)}

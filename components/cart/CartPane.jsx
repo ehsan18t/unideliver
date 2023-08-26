@@ -37,6 +37,7 @@ const CartPane = ({ children }) => {
               {data.length > 0 ? (
                 data.map((cartItem) => (
                   <CartItem
+                    className="border-b-[1px] pb-2 mb-1"
                     key={cartItem.id}
                     cartItem={cartItem}
                     onDelete={() => handleDeleteCartItem(cartItem)}

@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { RiDeleteBin5Line } from 'react-icons/ri'
 import { useUpdate } from '@/hooks'
 
-const CartItem = ({ cartItem, onDelete }) => {
+const CartItem = ({ cartItem, onDelete, className }) => {
   const { updateLoading, updateError, updateItem } = useUpdate()
   const [updatedData, setUpdatedData] = useState(cartItem)
 
@@ -23,7 +23,7 @@ const CartItem = ({ cartItem, onDelete }) => {
   }
 
   return (
-    <div>
+    <div className={className}>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
           <img
@@ -39,7 +39,7 @@ const CartItem = ({ cartItem, onDelete }) => {
 
             <div className="flex gap-2">
               <button
-                className="bg-gray-200 rounded-lg px-2 py-1"
+                className="bg-gray-200 rounded-lg px-2 py-1 hover:bg-slate-300"
                 onClick={() => {
                   updatedData.item.quantity = updatedData.item.quantity - 1
                   setUpdatedData(updatedData)
@@ -55,7 +55,7 @@ const CartItem = ({ cartItem, onDelete }) => {
                   setUpdatedData(updatedData)
                   handleUpdateItem('cart', updatedData.id)
                 }}
-                className="bg-gray-200 rounded-lg px-2 py-1"
+                className="bg-gray-200 rounded-lg px-2 py-1 hover:bg-slate-300"
               >
                 +
               </button>

@@ -20,7 +20,18 @@ export default function RootLayout({ children }) {
           <NavItem to="#" name="Shop" icon={AiOutlineShop} />
           {user && <NavItem to="/orders" name="My Orders" icon={BsBagCheck} />}
           {user && user.isAdmin && (
-            <NavItem to="/admin/users" name="User Control" icon={RiAdminLine} />
+            <>
+              <NavItem
+                to="/admin/users"
+                name="User Control"
+                icon={RiAdminLine}
+              />
+              <NavItem
+                to="/admin/settings"
+                name="Admin Dashboard"
+                icon={RiAdminLine}
+              />
+            </>
           )}
         </Navbar>
         {children}

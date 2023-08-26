@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react'
-import { collection, onSnapshot } from 'firebase/firestore'
+import { collection, query, where, onSnapshot } from 'firebase/firestore'
 import { db } from '@/config/firebase' // Update this import to match your Firebase setup
 
-const useFetchLive = (tableName) => {
+const useFetchLive = (tableName, fieldName, value) => {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchData = async () => {
-      const query = collection(db, tableName)
-      const unsubscribe = onSnapshot(query, (snapshot) => {
+      const q = query(collection(db, tableName), where(fieldName, '==', value))
+      const unsubscribe = onSnapshot(q, (snapshot) => {
         const newData = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
@@ -22,7 +22,7 @@ const useFetchLive = (tableName) => {
     }
 
     fetchData()
-  }, [tableName])
+  }, [tableName, fieldName, value])
 
   return { data, loading }
 }

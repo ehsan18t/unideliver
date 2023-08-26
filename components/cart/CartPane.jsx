@@ -6,10 +6,10 @@ import { useFetchLive } from '@/hooks'
 import Button from '@/components/common/Button'
 import { HiOutlineShoppingCart } from 'react-icons/hi'
 
-const CartPane = ({ children }) => {
+const CartPane = ({ children, uid }) => {
   const [isSidebarOpen, setSidebarOpen] = useState(false)
   const { delLoading, error, deleteItem } = useItemDeletion()
-  const { data, loading: isDataLoading } = useFetchLive('cart')
+  const { data, loading: isDataLoading } = useFetchLive('cart', 'uid', uid)
 
   const handleDeleteCartItem = async (item) => {
     deleteItem('cart', item.id)

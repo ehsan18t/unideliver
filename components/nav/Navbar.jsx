@@ -38,7 +38,7 @@ const Navbar = ({ children }) => {
           <Link href="/">UniDeliver</Link>
         </div>
         <div className="flex gap-3 items-center">
-          {user && <CartPane />}
+          {user && <CartPane uid={user.uid} />}
           <button
             ref={hamburgerButtonRef}
             onClick={() => setSidebarOpen(!isSidebarOpen)}

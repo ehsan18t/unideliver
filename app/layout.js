@@ -7,7 +7,7 @@ import '@/styles/globals.css'
 import { useAuth } from '@/hooks/useAuth'
 import SignIn from '@/components/signin/SignIn'
 import { ToastContainer } from 'react-toastify'
-import CartPane from '@/components/cart/CartPane'
+import { BsBagCheck } from 'react-icons/bs'
 
 export default function RootLayout({ children }) {
   const { user } = useAuth()
@@ -18,6 +18,7 @@ export default function RootLayout({ children }) {
           <SignIn />
           <NavItem to="/" name="Home" icon={AiOutlineHome} />
           <NavItem to="#" name="Shop" icon={AiOutlineShop} />
+          {user && <NavItem to="/orders" name="My Orders" icon={BsBagCheck} />}
           {user && user.isAdmin && (
             <NavItem to="/admin" name="Admin Panel" icon={RiAdminLine} />
           )}

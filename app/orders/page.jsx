@@ -15,7 +15,13 @@ const Orders = () => {
     <div className="m-5 rounded-lg shadow-lg border-[1px] p-5">
       <h2 className="border-b-2 text-2xl p-5">Your Orders</h2>
       {orders.length > 0 ? (
-        orders.map((order) => <Order key={order.id} order={order} />)
+        orders.map((order) => (
+          <Order
+            className="cursor-pointer hover:bg-gray-100"
+            key={order.id}
+            order={order}
+          />
+        ))
       ) : (
         <p className="flex justify-center">No orders found.</p>
       )}

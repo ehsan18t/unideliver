@@ -1,6 +1,7 @@
 import React from 'react'
 import dayjs from 'dayjs'
 import Link from 'next/link'
+import cn from 'classnames'
 
 const status = {
   1: 'Pending',
@@ -9,9 +10,9 @@ const status = {
   4: 'Delivered',
 }
 
-const Order = ({ order }) => {
+const Order = ({ order, className }) => {
   return (
-    <div className="border-b-[1px] p-3">
+    <div className={cn('border-b-[1px] p-3', className)}>
       <Link href={`/orders/${order.id}`}>
         <div className="space-y-2">
           <div className="flex justify-between items-center">

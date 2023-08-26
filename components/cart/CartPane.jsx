@@ -28,7 +28,7 @@ const CartPane = ({ children, uid }) => {
       deliveryCharge: deliveryCharge,
       location: location,
       status: 1,
-      createdAt: new Date().toISOString(),
+      date: new Date().toISOString(),
     }
 
     await addToFirebase('orders', dataToAdd)

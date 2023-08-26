@@ -62,10 +62,12 @@ const CartItem = ({ cartItem, onDelete, className }) => {
             </div>
           </div>
         </div>
-        <RiDeleteBin5Line
-          className="shop-item-del-button"
-          onClick={() => handleDeleteClick(item)}
-        />
+        <div className="w-16 h-full flex justify-center items-center">
+          <RiDeleteBin5Line
+            className="shop-item-del-button"
+            onClick={() => handleDeleteClick(item)}
+          />
+        </div>
       </div>
     </div>
   )

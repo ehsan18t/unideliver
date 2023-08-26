@@ -28,21 +28,28 @@ const CartPane = ({ children }) => {
           isSidebarOpen ? '-translate-y-100' : 'translate-y-full'
         }`}
       >
-        <div className="p-4">
+        <div className="p-4 h-full">
           <div className="flex justify-center text-3xl font-semibold text-slate-600 text-center border-b-2 pb-3">
             Cart
           </div>
-          <div className="mt-4">
-            {data.length > 0 ? (
-              data.map((cartItem) => (
-                <CartItem
-                  key={cartItem.id}
-                  cartItem={cartItem}
-                  onDelete={() => handleDeleteCartItem(cartItem)}
-                />
-              ))
-            ) : (
-              <p className="flex justify-center">No cart items found.</p>
+          <div className="mt-4 h-full flex flex-col">
+            <div className="flex-grow">
+              {data.length > 0 ? (
+                data.map((cartItem) => (
+                  <CartItem
+                    key={cartItem.id}
+                    cartItem={cartItem}
+                    onDelete={() => handleDeleteCartItem(cartItem)}
+                  />
+                ))
+              ) : (
+                <p className="flex justify-center">No cart items found.</p>
+              )}
+            </div>
+            {data.length > 0 && (
+              <Button className={'mb-36'} color="green">
+                Place Order
+              </Button>
             )}
           </div>
         </div>

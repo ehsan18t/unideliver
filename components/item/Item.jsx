@@ -37,6 +37,7 @@ const Item = ({ item, onDelete }) => {
     }
 
     // Data to be added to the cart document
+    item.quantity = 1
     const cartData = {
       item: item,
       uid: userId,

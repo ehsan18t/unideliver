@@ -4,9 +4,9 @@ import Link from 'next/link'
 
 const status = {
   1: 'Pending',
-  2: 'Confirmed',
-  3: 'Delivered',
-  4: 'Cancelled',
+  2: 'Purchase Confirmed',
+  3: 'On Your Way',
+  4: 'Delivered',
 }
 
 const Order = ({ order }) => {

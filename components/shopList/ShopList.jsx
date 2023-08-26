@@ -9,6 +9,7 @@ import ShopItem from './ShopItem'
 import AddShopForm from './AddShopForm'
 import { useAuth } from '@/hooks/useAuth'
 import useItemDeletion from '@/hooks/useItemDeletion'
+import Button from '@/components/common/Button'
 
 const ShopList = () => {
   const { user } = useAuth()
@@ -39,7 +40,7 @@ const ShopList = () => {
   return (
     <div className="shop-list mt-4">
       {user && user.isAdmin && (
-        <button onClick={() => setModalOpen(true)}>Add Shop</button>
+        <Button onClick={() => setModalOpen(true)}>Add Shop</Button>
       )}
 
       <ul className="my-grid">

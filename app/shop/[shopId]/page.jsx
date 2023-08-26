@@ -12,6 +12,7 @@ import useItemDeletion from '@/hooks/useItemDeletion'
 import Modal from '@/components/modal/Modal'
 import Item from '@/components/item/Item'
 import useFilteredItems from '@/hooks/useFilteredItems'
+import Button from '@/components/common/Button'
 
 export default function ShopPage() {
   const params = useParams()
@@ -41,12 +42,12 @@ export default function ShopPage() {
     <div>
       <ShopBanner shop={shop} />
       {user && user.isAdmin && (
-        <button
+        <Button
           className="mx-auto my-4 block transition ease-in-out duration-300 w-1/4 bg-blue-500 text-white rounded px-4 py-2"
           onClick={() => setModalOpen(true)}
         >
           Add Item
-        </button>
+        </Button>
       )}
       <div className="p-4">
         {items &&

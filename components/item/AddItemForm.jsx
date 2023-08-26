@@ -4,6 +4,7 @@ import { collection, addDoc } from 'firebase/firestore'
 import { db, storage } from '@/config/firebase'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import Button from '@/components/common/Button'
 
 const AddItemForm = ({ onClose, shopId }) => {
   const [itemName, setItemName] = useState('')
@@ -127,12 +128,12 @@ const AddItemForm = ({ onClose, shopId }) => {
           className="mb-2"
         />
 
-        <button
+        <Button
           className="add-item-button bg-blue-500 text-white rounded px-4 py-2"
           onClick={handleAddItem}
         >
           Add Item
-        </button>
+        </Button>
       </div>
     </div>
   )

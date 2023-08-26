@@ -70,9 +70,7 @@ const Item = ({ item, onDelete }) => {
         src={item.pictureURL}
         alt={item.itemName}
       />
-      <h2 className="pl-3 text-2xl font-bold tracking-tight">
-        {item.itemName}
-      </h2>
+      <h2 className="pl-3 text-xl font-bold tracking-tight">{item.itemName}</h2>
       <div className="p-5 flex-grow flex flex-col gap-2 justify-between">
         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
           {item.description}

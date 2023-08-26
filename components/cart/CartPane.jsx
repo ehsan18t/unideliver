@@ -4,6 +4,7 @@ import { BsCart4 } from 'react-icons/bs'
 import CartItem from '@/components/cart/CartItem'
 import useItemDeletion from '@/hooks/useItemDeletion'
 import { useFetchLive } from '@/hooks'
+import Button from '@/components/common/Button'
 
 const CartPane = ({ children }) => {
   const [isSidebarOpen, setSidebarOpen] = useState(false)
@@ -24,7 +25,7 @@ const CartPane = ({ children }) => {
       </div>
       <div
         className={`shadow-md fixed top-20 right-0 h-full w-1/3 bg-white text-gray-800 transform transition-transform ease-in-out ${
-          isSidebarOpen ? '-translate-x-100' : 'translate-x-full'
+          isSidebarOpen ? '-translate-y-100' : 'translate-y-full'
         }`}
       >
         <div className="p-4">

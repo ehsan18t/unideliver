@@ -21,9 +21,13 @@ const Settings = () => {
   useEffect(() => {
     if (orders) {
       setTotalOrders(orders.length)
-      const income = orders.reduce((acc, order) => {
-        return acc + order.deliveryCharge
-      }, 0)
+      // also status needs to be delivered or 4
+      let income = 0
+      orders.forEach((order) => {
+        if (order.status === '4') {
+          income += order.deliveryCharge
+        }
+      })
       setTotalIncome(income)
     }
   }, [orders])

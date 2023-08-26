@@ -34,7 +34,7 @@ const Navbar = ({ children }) => {
     <nav className="bg-white p-4 shadow-sm">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2 text-gray-600 font-semibold text-3xl font-sans">
-          <img src="./logo.png" className="w-12 h-12" alt="" />
+          <img src="/logo.png" className="w-12 h-12" alt="" />
           <Link href="/">UniDeliver</Link>
         </div>
         <div className="flex gap-3 items-center">

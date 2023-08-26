@@ -1,8 +1,8 @@
 'use client'
 import React, { useState } from 'react'
 
-const Toggle = ({ onChange }) => {
-  const [isActive, setIsActive] = useState(false)
+const Toggle = ({ onChange, value = false }) => {
+  const [isActive, setIsActive] = useState(value)
 
   const toggle = () => {
     const state = !isActive

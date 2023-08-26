@@ -49,7 +49,7 @@ export default function ShopPage() {
           Add Item
         </Button>
       )}
-      <div className="p-4">
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-4 md:px-6">
         {items &&
           items.map((item) => (
             <Item

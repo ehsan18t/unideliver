@@ -61,45 +61,46 @@ const Item = ({ item, onDelete }) => {
   }
 
   return (
-    <li key={item.id}>
-      <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-        <img
-          className="rounded-t-lg shadow-md"
-          src={item.pictureURL}
-          alt={item.itemName}
-        />
-        <div className="p-5">
-          <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-            {item.itemName}
-          </h5>
-          <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-            {item.description}
-          </p>
-          {user && user.isAdmin && (
-            <div className="flex justify-between">
-              <p className="text-sm text-red-500 font-semibold dark:text-gray-200">
-                {item.price} + {item.deliveryCharge} TK
-              </p>
-              <div className="flex gap-3">
-                <button
-                  className="shop-item-del-button"
-                  onClick={handleDeleteClick}
-                >
-                  <RiDeleteBin5Line />
-                </button>
+    <div
+      key={item.id}
+      className="flex h-full bg-white flex-col gap-3 shadow rounded-lg"
+    >
+      <img
+        className="h-64 md:h-72 w-full object-cover rounded-t-lg"
+        src={item.pictureURL}
+        alt={item.itemName}
+      />
+      <h2 className="pl-3 text-2xl font-bold tracking-tight">
+        {item.itemName}
+      </h2>
+      <div className="p-5 flex-grow flex flex-col gap-2 justify-between">
+        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+          {item.description}
+        </p>
+        {user && user.isAdmin && (
+          <div className="flex justify-between items-center">
+            <p className="text-sm text-red-500 font-semibold dark:text-gray-200">
+              {item.price} + {item.deliveryCharge} TK
+            </p>
+            <div className="flex gap-3">
+              <button
+                className="shop-item-del-button"
+                onClick={handleDeleteClick}
+              >
+                <RiDeleteBin5Line />
+              </button>
 
-                <button
-                  className="text-4xl text-teal-700 rounded-full p-2 transition duration-200 ease-in-out hover:text-white hover:bg-gray-600"
-                  onClick={() => addToCartHandler(item, user.uid)}
-                >
-                  <TiShoppingCart />
-                </button>
-              </div>
+              <button
+                className="text-4xl text-teal-700 rounded-full p-2 transition duration-200 ease-in-out hover:text-white hover:bg-gray-600"
+                onClick={() => addToCartHandler(item, user.uid)}
+              >
+                <TiShoppingCart />
+              </button>
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
-    </li>
+    </div>
   )
 }
 

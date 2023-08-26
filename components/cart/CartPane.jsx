@@ -1,5 +1,5 @@
 'use client'
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import { BsCart4 } from 'react-icons/bs'
 import CartItem from '@/components/cart/CartItem'
 import useItemDeletion from '@/hooks/useItemDeletion'
@@ -7,7 +7,6 @@ import { useFetchLive } from '@/hooks'
 
 const CartPane = ({ children }) => {
   const [isSidebarOpen, setSidebarOpen] = useState(false)
-  const hamburgerButtonRef = useRef(null)
   const { delLoading, error, deleteItem } = useItemDeletion()
   const { data, loading: isDataLoading } = useFetchLive('cart')
 
@@ -20,7 +19,6 @@ const CartPane = ({ children }) => {
       <div className="flex gap-3 items-center">
         <BsCart4
           onClick={() => setSidebarOpen(!isSidebarOpen)}
-          ref={hamburgerButtonRef}
           className="w-10 h-10"
         />
       </div>

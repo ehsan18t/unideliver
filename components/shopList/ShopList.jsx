@@ -43,7 +43,7 @@ const ShopList = () => {
         <Button onClick={() => setModalOpen(true)}>Add Shop</Button>
       )}
 
-      <ul className="my-grid">
+      <div className="my-grid">
         {shops.map((shop) => (
           <ShopItem
             key={shop.id}
@@ -51,7 +51,7 @@ const ShopList = () => {
             onDelete={() => handleDeleteShop(shop)}
           />
         ))}
-      </ul>
+      </div>
 
       <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
         <AddShopForm onClose={() => setModalOpen(false)} />

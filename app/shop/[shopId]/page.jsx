@@ -43,13 +43,13 @@ export default function ShopPage() {
       <ShopBanner shop={shop} />
       {user && user.isAdmin && (
         <Button
-          className="mx-auto my-4 block transition ease-in-out duration-300 w-1/4 bg-blue-500 text-white rounded px-4 py-2"
+          className="mx-auto mb-4 block transition ease-in-out duration-300 w-1/4 bg-blue-500 text-white rounded px-4 py-2"
           onClick={() => setModalOpen(true)}
         >
           Add Item
         </Button>
       )}
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-4 md:px-6">
+      <div className="grid my-4 grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-4 md:px-6">
         {items &&
           items.map((item) => (
             <Item

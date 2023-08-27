@@ -25,7 +25,7 @@ const OrderViewPage = () => {
     },
     {
       status: 2,
-      name: 'Purchase Confirmed',
+      name: 'Confirmed',
       color: 'blue',
       text: 'Test',
     },

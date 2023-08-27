@@ -24,6 +24,7 @@ const SignIn = () => {
   }, [settingsCloud])
 
   const signInWithGoogle = async () => {
+    let isFailed = false
     signInWithPopup(auth, googleProvider)
       .then(async (result) => {
         // You can access the user details from the result object
@@ -37,7 +38,7 @@ const SignIn = () => {
             position: 'bottom-right',
             autoClose: 2000,
           })
-
+          isFailed = true
           signOut(auth)
 
           throw new Error('Invalid email address')
@@ -46,7 +47,7 @@ const SignIn = () => {
             position: 'bottom-right',
             autoClose: 2000,
           })
-
+          isFailed = true
           signOut(auth)
 
           throw new Error('Banned User')
@@ -102,6 +103,9 @@ const SignIn = () => {
           autoClose: 2000,
         })
       })
+    if (isFailed) {
+      signOut(auth)
+    }
   }
 
   const handleSignOut = () => {

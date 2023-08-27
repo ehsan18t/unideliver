@@ -23,6 +23,7 @@ export default function ShopPage() {
   const { user } = useAuth()
   const { loading, error, deleteItem } = useItemDeletion()
   const [searchText, setSearchText] = useState('')
+  const [itemList, setItemList] = useState()
 
   useEffect(() => {
     const unsubscribe = onSnapshot(doc(db, 'shops', shopId), (doc) => {
@@ -30,6 +31,13 @@ export default function ShopPage() {
     })
     return () => unsubscribe()
   }, [shopId])
+
+  useEffect(() => {
+    const filteredItems = items.filter((item) => {
+      return item.itemName.toLowerCase().includes(searchText.toLowerCase())
+    })
+    setItemList(filteredItems)
+  }, [searchText, items])
 
   if (!shop) {
     return <Loading />
@@ -60,8 +68,8 @@ export default function ShopPage() {
         />
       </div>
       <div className="grid my-4 grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-4 md:px-6">
-        {items &&
-          items.map((item) => (
+        {itemList &&
+          itemList.map((item) => (
             <Item
               key={item.id}
               item={item}

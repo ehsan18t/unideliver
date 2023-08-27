@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
         <Navbar>
           <SignIn />
           <NavItem to="/" name="Home" icon={AiOutlineHome} />
-          {user && (
+          {user && !user.isAdmin && (
             <>
               {user.isDeliveryMan ? (
                 <>

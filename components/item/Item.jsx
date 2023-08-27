@@ -75,18 +75,20 @@ const Item = ({ item, onDelete }) => {
         <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
           {item.description}
         </p>
-        {user && user.isAdmin && (
-          <div className="flex justify-between items-center">
-            <p className="text-sm text-red-500 font-semibold dark:text-gray-200">
-              {item.price} + {item.deliveryCharge} TK
-            </p>
+        <div className="flex justify-between items-center">
+          <p className="text-sm text-red-500 font-semibold dark:text-gray-200">
+            {item.price} + {item.deliveryCharge} TK
+          </p>
+          {user && (
             <div className="flex gap-3">
-              <button
-                className="shop-item-del-button"
-                onClick={handleDeleteClick}
-              >
-                <RiDeleteBin5Line />
-              </button>
+              {user.isAdmin && (
+                <button
+                  className="shop-item-del-button"
+                  onClick={handleDeleteClick}
+                >
+                  <RiDeleteBin5Line />
+                </button>
+              )}
 
               <button
                 className="text-4xl text-teal-700 rounded-full p-2 transition duration-200 ease-in-out hover:text-white hover:bg-gray-600"
@@ -95,8 +97,8 @@ const Item = ({ item, onDelete }) => {
                 <TiShoppingCart />
               </button>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   )

@@ -4,9 +4,19 @@ import dayjs from 'dayjs'
 import cn from 'classnames'
 import Button from '@/components/common/Button'
 import { useUpdate } from '@/hooks'
+import { useAuth } from '@/hooks/useAuth'
 
 const DeliveryOrder = ({ order, className }) => {
   const { updateItem } = useUpdate()
+  const { user, loading } = useAuth()
+
+  if (loading) {
+    return <div>Loading...</div>
+  }
+
+  if (!loading && !user) {
+    return <div>Not Authorized</div>
+  }
 
   return (
     <div className={cn('border-b-[1px] p-3', className)}>
@@ -30,7 +40,11 @@ const DeliveryOrder = ({ order, className }) => {
           </p>
           <Button
             onClick={() => {
-              updateItem('orders', order.id, { ...order, status: 2 })
+              updateItem('orders', order.id, {
+                ...order,
+                status: 2,
+                did: user.uid,
+              })
             }}
           >
             Take Order

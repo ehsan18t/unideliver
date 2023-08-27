@@ -43,7 +43,7 @@ export default function ShopPage() {
       <ShopBanner shop={shop} />
       {user && user.isAdmin && (
         <Button
-          className="mx-auto mb-4 block transition ease-in-out duration-300 w-1/4 bg-blue-500 text-white rounded px-4 py-2"
+          className="mx-auto my-4 block transition ease-in-out duration-300 w-1/4 bg-blue-500 text-white rounded px-4 py-2"
           onClick={() => setModalOpen(true)}
         >
           Add Item

@@ -22,6 +22,7 @@ export default function ShopPage() {
   const [modalOpen, setModalOpen] = useState(false)
   const { user } = useAuth()
   const { loading, error, deleteItem } = useItemDeletion()
+  const [searchText, setSearchText] = useState('')
 
   useEffect(() => {
     const unsubscribe = onSnapshot(doc(db, 'shops', shopId), (doc) => {
@@ -49,6 +50,15 @@ export default function ShopPage() {
           Add Item
         </Button>
       )}
+      <div className="flex w-full justify-center items-center py-4">
+        <input
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+          type="text"
+          placeholder="Search Items"
+          className="border border-gray-300 rounded-md p-2 w-4/5"
+        />
+      </div>
       <div className="grid my-4 grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 px-4 md:px-6">
         {items &&
           items.map((item) => (

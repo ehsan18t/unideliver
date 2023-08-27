@@ -1,10 +1,10 @@
 'use client'
 import React, { useState, useEffect, useRef } from 'react'
 import { HiMenu } from 'react-icons/hi'
-import { BsCart4 } from 'react-icons/bs'
 import { useAuth } from '@/hooks/useAuth'
 import Link from 'next/link'
 import CartPane from '@/components/cart/CartPane'
+import { RiMenu4Fill } from 'react-icons/ri'
 
 const Navbar = ({ children }) => {
   const [isSidebarOpen, setSidebarOpen] = useState(false)
@@ -52,7 +52,7 @@ const Navbar = ({ children }) => {
                 className="w-10 h-10 rounded-full cursor-pointer"
               />
             ) : (
-              <HiMenu className="w-10 h-10" />
+              <RiMenu4Fill className="w-10 h-10" />
             )}
           </button>
         </div>

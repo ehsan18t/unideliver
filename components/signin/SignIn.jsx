@@ -1,5 +1,6 @@
 'use client'
 import './signin.css'
+import { useEffect, useState } from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import { auth, googleProvider, db } from '@/config/firebase'
 import { useAuthState } from 'react-firebase-hooks/auth'
@@ -8,19 +9,40 @@ import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { LiaSignOutAltSolid } from 'react-icons/lia'
+import { useFetchAll } from '@/hooks'
 
 const SignIn = () => {
   const [user] = useAuthState(auth)
+  const { data: settingsCloud } = useFetchAll('settings')
+  const [settings, setSettings] = useState()
+
+  useEffect(() => {
+    if (settingsCloud) {
+      setSettings(settingsCloud[0])
+    }
+  }, [settingsCloud])
 
   const signInWithGoogle = () => {
     signInWithPopup(auth, googleProvider)
       .then((result) => {
         // You can access the user details from the result object
         const user = result.user
-        toast.success('Login successful!', {
-          position: 'bottom-right',
-          autoClose: 2000,
-        })
+
+        if (!user.email.endsWith('uiu.ac.bd') && settings?.allowAllMail) {
+          toast.error('Only University Mail Allowed!', {
+            position: 'bottom-right',
+            autoClose: 2000,
+          })
+
+          signOut(auth)
+
+          throw new Error('Invalid email address')
+        } else {
+          toast.success('Login successful!', {
+            position: 'bottom-right',
+            autoClose: 2000,
+          })
+        }
 
         // Check if the user exists in the "users" table
         const userRef = doc(db, 'users', user.uid)

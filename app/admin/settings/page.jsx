@@ -24,7 +24,7 @@ const Settings = () => {
       // also status needs to be delivered or 4
       let income = 0
       orders.forEach((order) => {
-        if (order.status === '4') {
+        if (order.status === 4) {
           income += order.deliveryCharge
         }
       })

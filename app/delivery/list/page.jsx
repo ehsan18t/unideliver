@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { useFetchAll } from '@/hooks'
-import DeliveryOrder from '@/components/delivery/Order'
+import DeliveryOrder from '@/components/delivery/DeliveryOrder'
 
 const Orders = () => {
   const { data: orders, loading } = useFetchAll('orders')

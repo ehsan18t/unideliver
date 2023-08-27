@@ -9,9 +9,10 @@ import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { LiaSignOutAltSolid } from 'react-icons/lia'
-import { useFetchAll } from '@/hooks'
+import { useFetchAll, useFetchItemByIdNew } from '@/hooks'
 
 const SignIn = () => {
+  const { fetchItem } = useFetchItemByIdNew()
   const [user] = useAuthState(auth)
   const { data: settingsCloud } = useFetchAll('settings')
   const [settings, setSettings] = useState()
@@ -22,11 +23,14 @@ const SignIn = () => {
     }
   }, [settingsCloud])
 
-  const signInWithGoogle = () => {
+  const signInWithGoogle = async () => {
     signInWithPopup(auth, googleProvider)
-      .then((result) => {
+      .then(async (result) => {
         // You can access the user details from the result object
         const user = result.user
+
+        const fetchedUser = await fetchItem('users', user.uid)
+        console.log(fetchedUser)
 
         if (!user.email.endsWith('uiu.ac.bd') && settings?.allowAllMail) {
           toast.error('Only University Mail Allowed!', {
@@ -37,6 +41,15 @@ const SignIn = () => {
           signOut(auth)
 
           throw new Error('Invalid email address')
+        } else if (fetchedUser.isBanned) {
+          toast.error('Sorry, Your account is banned!', {
+            position: 'bottom-right',
+            autoClose: 2000,
+          })
+
+          signOut(auth)
+
+          throw new Error('Banned User')
         } else {
           toast.success('Login successful!', {
             position: 'bottom-right',

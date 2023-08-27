@@ -70,7 +70,7 @@ const Settings = () => {
               onChange={async (state) => handleToggle(state, 'allowAllMail')}
               value={settings.allowAllMail}
             />{' '}
-            <span className="text-lg"> Allow All Email </span>
+            <span className="text-lg"> University Email Only </span>
           </div>
           <div className="flex gap-4">
             <Toggle
